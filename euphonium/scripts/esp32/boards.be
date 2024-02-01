@@ -12,6 +12,18 @@ ESP32_BOARDS = [
         }
     },
     {
+        "name":"louder ESP32",
+        "state": {
+            "dac":"TAS5805M",
+            "mclk":"0",
+            "bck":"26",
+            "ws":"25",
+            "data":"22",
+            "scl":"27",
+            "sda":"21"
+        }
+    },
+    {
        "name":"AI-Thinker Audio board (A1S AC101)",
         "state": {
             "dac":"AC101",
