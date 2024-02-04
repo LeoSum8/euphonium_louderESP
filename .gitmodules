@@ -4,7 +4,7 @@
 	url = https://github.com/feelfreelinux/bell
 [submodule "src/core/external/cspot"]
 	path = src/core/external/cspot
-	url = https://github.com/feelfreelinux/cspot
+        url = https://github.com/anabolyc/esp32-cspot
 [submodule "src/targets/esp32/components/esp_littlefs"]
 	path = src/targets/esp32/components/esp_littlefs
 	url = https://github.com/muvox-io/esp_littlefs.git
