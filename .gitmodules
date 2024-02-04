@@ -1,11 +1,11 @@
-[submodule "src/core/external/bell"]
-	path = src/core/external/bell
+[submodule "euphonium/cspot"]
+	path = euphonium/cspot
+	url = https://github.com/anabolyc/esp32-cspot
+[submodule "euphonium/bell"]
+	path = euphonium/bell
+	url = https://github.com/feelfreelinux/bell
 	branch = master
 	commit = c5c224ec08e5c9b3be51efe399ae6b7cd9862b78
-	url = https://github.com/feelfreelinux/bell
-[submodule "src/core/external/cspot"]
-	path = src/core/external/cspot
-        url = https://github.com/anabolyc/esp32-cspot
-[submodule "src/targets/esp32/components/esp_littlefs"]
-	path = src/targets/esp32/components/esp_littlefs
-	url = https://github.com/muvox-io/esp_littlefs.git
+[submodule "targets/esp32/app/components/esp_littlefs"]
+	path = targets/esp32/app/components/esp_littlefs
+	url = https://github.com/joltwallet/esp_littlefs.git
