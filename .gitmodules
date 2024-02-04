@@ -1,6 +1,7 @@
 [submodule "src/core/external/bell"]
 	path = src/core/external/bell
-	branch = develop
+	branch = master
+	commit = c5c224ec08e5c9b3be51efe399ae6b7cd9862b78
 	url = https://github.com/feelfreelinux/bell
 [submodule "src/core/external/cspot"]
 	path = src/core/external/cspot
