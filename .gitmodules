@@ -1,11 +1,15 @@
 [submodule "euphonium/cspot"]
 	path = euphonium/cspot
-	url = https://github.com/anabolyc/esp32-cspot
+	url = https://github.com/feelfreelinux/cspot
+	branch = master
+	commit = fedf7fcefafde024642f9dbdd9591828ac391b32
 [submodule "euphonium/bell"]
 	path = euphonium/bell
 	url = https://github.com/feelfreelinux/bell
 	branch = master
-	commit = c5c224ec08e5c9b3be51efe399ae6b7cd9862b78
+	commit = 2904587874a48f0746b9f4686ba81aa631ab0ec8
 [submodule "targets/esp32/app/components/esp_littlefs"]
 	path = targets/esp32/app/components/esp_littlefs
 	url = https://github.com/joltwallet/esp_littlefs.git
+	branch = master
+	tag = v1.3.1
