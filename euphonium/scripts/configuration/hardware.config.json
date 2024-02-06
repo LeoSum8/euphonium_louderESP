@@ -1,0 +1,1 @@
+{"board": "louder ESP32", "dac": "TAS5805M", "mclk":"0", "bck":"26", "ws":"25", "data":"22", "scl":"27", "sda":"21"}
