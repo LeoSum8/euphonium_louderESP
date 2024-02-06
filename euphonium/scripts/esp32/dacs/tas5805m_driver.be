@@ -33,6 +33,9 @@ class TAS5805M : DACDriver
         sleep_ms(100)
         # Setting to PLAY as seen in https://github.com/sonocotta/esp32-tas5805m-dac/blob/main/tas5805m.cpp
         i2c.write(ADDRESS, 0x03, 0x03) 
+
+        # set volume
+        i2c.write(ADDRESS, 0x4c, 0x50)  # volume
     end
 
     def unload_i2s()
