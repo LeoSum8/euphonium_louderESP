@@ -40,7 +40,8 @@ class TAS5805M : DACDriver
     end
 
     def unload_i2s()
-        i2s.uninstall()
+        i2s.uninstall()        
+        i2c.delete()
     end
 
     def set_volume(volume)
