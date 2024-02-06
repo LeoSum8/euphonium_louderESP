@@ -1,5 +1,6 @@
 class TAS5805M : DACDriver
     def init()
+        var volume_table
         self.name = "TAS5805M"
         self.hardware_volume_control = true
         # define a volume table, saves up on log10
