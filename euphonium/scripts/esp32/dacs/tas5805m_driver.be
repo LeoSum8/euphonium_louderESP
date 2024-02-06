@@ -36,7 +36,7 @@ class TAS5805M : DACDriver
 
         # set volume
         sleep_ms(100)
-        i2c.write(ADDRESS, 0x4c, 0x50)  # volume
+        i2c.write(ADDRESS, 0x4c, 200)  # volume
     end
 
     def unload_i2s()
