@@ -20,6 +20,8 @@ class TAS5805M : DACDriver
         i2s.install(config)
         i2s.set_pins(self.get_i2s_pins())
 
+        i2c.install(int(self.get_gpio('sda')), int(self.get_gpio('scl')))
+        
         # pull GPIO33 to HIGH, this will turn on the DAC (louder ESP32 specific)
         gpio.pin_mode(33, gpio.OUTPUT)
         gpio.digital_write(33, 1)
