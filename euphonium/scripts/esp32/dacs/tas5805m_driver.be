@@ -27,16 +27,16 @@ class TAS5805M : DACDriver
         gpio.pin_mode(33, gpio.OUTPUT)
         gpio.digital_write(33, 1)
 
-        sleep_ms(100)
+        sleep_ms(200)
         # Setting to HI Z as seen in https://github.com/sonocotta/esp32-tas5805m-dac/blob/main/tas5805m.cpp
         i2c.write(ADDRESS, 0x03, 0x02) 
-        sleep_ms(100)
+        sleep_ms(200)
         # Setting to PLAY as seen in https://github.com/sonocotta/esp32-tas5805m-dac/blob/main/tas5805m.cpp
         i2c.write(ADDRESS, 0x03, 0x03) 
 
         # set volume
-        sleep_ms(100)
-        i2c.write(ADDRESS, 0x4c, 200)  # volume
+        sleep_ms(200)
+        i2c.write(ADDRESS, 0x4c, 220)  # volume
     end
 
     def unload_i2s()
@@ -46,10 +46,15 @@ class TAS5805M : DACDriver
 
     def set_volume(volume)
         # 0-255, where 0 = 0 Db, 255 = mute
-        var volume_step = volume / 100.0
-        var actual_volume = int(volume_step * 32)
+        
+        var volume_step = 1-(volume / 100.0)
+        var actual_volume = int(volume_step * 255)
+        i2c.write(0x2D, 0x4c, actual_volume)
+
         # TAS5805M_DIG_VOL_CTRL_REGISTER = 0x4c according to https://github.com/sonocotta/esp32-tas5805m-dac/blob/main/tas5805m.hpp
-        i2c.write(0x2D, 0x4c, self.volume_table[actual_volume])    
+        # var volume_step = volume / 100.0
+        # var actual_volume = int(volume_step * 32)
+        # i2c.write(0x2D, 0x4c, self.volume_table[actual_volume])    
     end
 
     def make_config_form(ctx, state) 
