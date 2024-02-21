@@ -104,11 +104,6 @@ rec {
       # build firmware
       idf.py build
 
-      ${pkgs.gk-flasher}/bin/gk-flasher package \
-        --package-esp-idf ./build \
-        --package-output ./build/euphonium.gk_pkg \
-        --muvox-api-hardware-project-identifier MUVOX \
-        --version dev
       runHook postBuild
     '';
     installPhase = ''
@@ -121,42 +116,7 @@ rec {
       cp ota_data_initial.bin $out/ota_data_initial.bin
       cp *-flash_args $out/
       cp flash_args $out/
-      cp euphonium.gk_pkg $out/euphonium.gk_pkg
     '';
     dontConfigure = true;
-  };
-
-  # build target cli
-  euphoniumcli = stdenv.mkDerivation {
-    name = "euphoniumcli";
-    src = ../.;
-    dontConfigure = true;
-    nativeBuildInputs = with pkgs; [
-      avahi
-      avahi-compat
-      cmake
-      python3
-      python3Packages.protobuf
-      python3Packages.setuptools
-      unstable.mbedtls
-      portaudio
-      protobuf
-    ];
-    # Patch nanopb shebangs to refer to provided python
-    postPatch = ''
-      patchShebangs src/core/external/bell/external/nanopb/generator/*
-    '';
-    buildPhase = ''
-      cd src/targets/cli
-      cmake . -DCMAKE_SKIP_BUILD_RPATH=ON
-      make -j $NIX_BUILD_CORES
-    '';
-    installPhase = ''
-      mkdir -p $out/bin
-      cp euphoniumcli $out/bin
-
-      mkdir -p $out/lib
-      cp euphonium/bell/external/opencore-aacdec/libopencore-aacdec.so $out/lib
-    '';
   };
 }
