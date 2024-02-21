@@ -24,19 +24,19 @@ class TAS5805M : DACDriver
         i2c.install(int(self.get_gpio('sda')), int(self.get_gpio('scl')))
         
         # pull GPIO33 to HIGH, this will turn on the DAC (louder ESP32 specific)
-        sleep_ms(1000)
+        #sleep_ms(1000)
         gpio.pin_mode(33, gpio.OUTPUT)
         gpio.digital_write(33, 1)
 
-        sleep_ms(200)
+        #sleep_ms(200)
         # Setting to HI Z as seen in https://github.com/sonocotta/esp32-tas5805m-dac/blob/main/tas5805m.cpp
         i2c.write(ADDRESS, 0x03, 0x02) 
-        sleep_ms(200)
+        #sleep_ms(200)
         # Setting to PLAY as seen in https://github.com/sonocotta/esp32-tas5805m-dac/blob/main/tas5805m.cpp
         i2c.write(ADDRESS, 0x03, 0x03) 
 
         # set volume
-        sleep_ms(200)
+        #sleep_ms(200)
         i2c.write(ADDRESS, 0x4c, 220)  # volume
     end
 
