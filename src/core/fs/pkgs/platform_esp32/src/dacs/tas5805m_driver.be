@@ -36,6 +36,8 @@ class TAS5805M : DACDriver
         # pull GPIO33 to HIGH, this will turn on the DAC (louder ESP32 specific)
         gpio.pin_mode(33, gpio.OUTPUT)
         gpio.digital_write(33, 1)
+        # gpio.pin_mode(self.get_gpio('enablePin'), gpio.OUTPUT)
+        # gpio.digital_write(self.get_gpio('enablePin'), gpio.HIGH)
 
         # Setting to HI Z as seen in https://github.com/sonocotta/esp32-tas5805m-dac/blob/main/tas5805m.cpp
         i2c.write(self.ma_addr, 0x03, 0x02) 
@@ -44,44 +46,43 @@ class TAS5805M : DACDriver
         i2c.write(self.ma_addr, 0x03, 0x03) 
 
         # Set Volume to a safe level..
-        i2c.write(self.ma_addr, 64, 220)
+        i2c.write(self.ma_addr, 0x4c, 220)
 
         # Init done.
     end
 
     def unload_i2s()
-        i2s.disable_expand()
         i2s.uninstall()
         i2c.delete()
     end
 
     def set_volume(volume)
+        # euphonium: 100-0, where 100 = 0 Db, 0 = mute
+        # DAC: 0-255, where 0 = 0 Db, 255 = mute
+
         var volume_table = self.get_volume_table()
         var volume_index = int(((volume / 100.0) * (volume_table.size() - 1)) + 0.5)
         
-        i2c.write(self.ma_addr, 64, volume_table[volume_index])
+        # i2c.write(self.ma_addr, 0x4c, volume_table[volume_index])
 
-
+        # no volume table for now
+        var volume_step = 1-(volume / 100.0)
+        var actual_volume = int(volume_step * 255)
+        i2c.write(self.ma_addr, 0x4c, actual_volume)
     end
 
     def make_config_form(ctx, state)
         super(self).make_config_form(ctx, state)
-        var pins_group = ctx.create_group('MA12070P_pins', { 'label': 'DAC binary pins' })
+        var pins_group = ctx.create_group('TAS5805m_pins', { 'label': 'DAC binary pins' })
         
         pins_group.number_field('enablePin', {
             'label': "Enable Pin",
-            'default': 0,
-            'group': 'MA12070P_pins',
+            'default': 33,
+            'group': 'TAS5805m_pins',
         })
 
-        pins_group.number_field('mutePin', {
-            'label': "Mute Pin",
-            'default': 0,
-            'group': 'MA12070P_pins',
-        })
-       
     end
 
 end
 
-hardware.register_driver(MA12070P())
+hardware.register_driver(TAS5805M())

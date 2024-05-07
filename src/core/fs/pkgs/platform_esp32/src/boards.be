@@ -24,5 +24,18 @@ ESP32_BOARDS = [
             "enablePin": "19",
             "mutePin": "21"
        }
+    },
+    {
+        "name":"louder ESP32",
+        "state": {
+            "dac":"TAS5805M",
+            "mclk":"0",
+            "bck":"26",
+            "ws":"25",
+            "data":"22",
+            "scl":"27",
+            "sda":"21",
+            "enablePin": "33"
+       }
     }
  ]
