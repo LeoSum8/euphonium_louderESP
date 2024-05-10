@@ -21,8 +21,7 @@ ESP32_BOARDS = [
             "data":"26",
             "scl":"22",
             "sda":"23",
-            "enablePin": "19",
-            "mutePin": "21"
+            "enablePin": "19"
        }
     }
  ]
